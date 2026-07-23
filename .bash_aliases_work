@@ -1,0 +1,9 @@
+alias loalias='cat $HOME/Develop/utils/tools/serverAliases | xclip -selection clipboard'
+alias ssh="loalias && ssh"
+alias chromedart="chromium  --disable-web-security --user-data-dir=~/Develop/chromeTMP/ --remote-debugging-port=9666"
+alias ant_list="ant -p build.xml"
+alias ant="ant -lib ../LogObject/lib/"
+alias festispwd="gpg -d ~/Develop/utils/passwd.gpg | grep -A2 Festis | awk NR==3 | clipcopy"
+alias mypassword="gpg -d ~/Develop/utils/passwd.gpg | grep -i -A2 $1"
+alias sctlstart="sctl env clean; sctl env up; sleep 2; sctl loas logs $1"
+alias loasreload="sctl env clean; sctl loas reload; sleep 2; sctl loas logs $1"
