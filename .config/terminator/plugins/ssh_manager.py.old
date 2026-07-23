@@ -1,0 +1,171 @@
+AVAILABLE = ['SSHManagerPlugin']
+
+import os
+from terminatorlib.plugin import TerminatorPlugin
+from terminatorlib.plugins.plugin import Plugin
+
+from gi.repository import Gtk
+from paramiko.config import SSHConfig
+
+
+class SSHManagerPlugin(TerminatorPlugin):
+    capabilities = ['terminal_menu']
+
+    def __init__(self):
+        self.hosts = self.load_hosts()
+
+    # -------------------------
+    # SSH CONFIG PARSING
+    # -------------------------
+    def load_hosts(self):
+        path = os.path.expanduser("~/.ssh/config")
+
+        if not os.path.exists(path):
+            return []
+
+        config = SSHConfig()
+        with open(path) as f:
+            config.parse(f)
+
+        hosts = []
+        for entry in config._config:
+            if 'host' in entry:
+                hosts.extend(entry['host'])
+
+        # remove wildcards and duplicates
+        clean = sorted(set(h for h in hosts if '*' not in h))
+        return clean
+
+    # -------------------------
+    # MENU INTEGRATION
+    # -------------------------
+    def callback(self, menuitems, menu, terminal):
+        ssh_menu = Gtk.MenuItem(label="SSH Manager")
+        submenu = Gtk.Menu()
+
+        # Quick connect submenu
+        connect_item = Gtk.MenuItem(label="Connect (Search)")
+        connect_item.connect("activate", self.open_search_dialog, terminal)
+        submenu.append(connect_item)
+
+        # Direct list (fallback)
+        list_menu = Gtk.MenuItem(label="Quick List")
+        list_submenu = Gtk.Menu()
+
+        for host in self.hosts:
+            item = Gtk.MenuItem(label=host)
+            item.connect("activate", self.connect_ssh, terminal, host)
+            list_submenu.append(item)
+
+        list_menu.set_submenu(list_submenu)
+        submenu.append(list_menu)
+
+        # Split connect
+        split_item = Gtk.MenuItem(label="Connect in Split")
+        split_item.connect("activate", self.open_split_dialog, terminal)
+        submenu.append(split_item)
+
+        ssh_menu.set_submenu(submenu)
+        menuitems.append(ssh_menu)
+
+    # -------------------------
+    # BASIC SSH EXECUTION
+    # -------------------------
+    def connect_ssh(self, widget, terminal, host):
+        terminal.feed(f"ssh {host}\n")
+
+    # -------------------------
+    # SEARCH DIALOG
+    # -------------------------
+    def open_search_dialog(self, widget, terminal):
+        dialog = Gtk.Dialog(title="SSH Connect", transient_for=None, flags=0)
+        dialog.set_default_size(400, 300)
+
+        box = dialog.get_content_area()
+
+        entry = Gtk.Entry()
+        entry.set_placeholder_text("Type to search host...")
+
+        listbox = Gtk.ListBox()
+
+        # populate list
+        for host in self.hosts:
+            row = Gtk.ListBoxRow()
+            label = Gtk.Label(label=host, xalign=0)
+            row.add(label)
+            listbox.add(row)
+
+        # filtering logic
+        def filter_list(text):
+            for row in listbox.get_children():
+                label = row.get_child()
+                visible = text.lower() in label.get_text().lower()
+                row.set_visible(visible)
+
+        entry.connect("changed", lambda e: filter_list(e.get_text()))
+
+        # connect on enter
+        def on_activate(entry):
+            text = entry.get_text()
+            if text:
+                terminal.feed(f"ssh {text}\n")
+                dialog.destroy()
+
+        entry.connect("activate", on_activate)
+
+        # double click support
+        def on_row_activated(listbox, row):
+            host = row.get_child().get_text()
+            terminal.feed(f"ssh {host}\n")
+            dialog.destroy()
+
+        listbox.connect("row-activated", on_row_activated)
+
+        box.add(entry)
+        box.add(listbox)
+
+        dialog.show_all()
+
+    # -------------------------
+    # SPLIT + MULTI CONNECT
+    # -------------------------
+    def open_split_dialog(self, widget, terminal):
+        dialog = Gtk.Dialog(title="Split SSH Connect", transient_for=None, flags=0)
+        dialog.set_default_size(400, 300)
+
+        box = dialog.get_content_area()
+
+        info = Gtk.Label(label="Enter hosts (comma-separated):")
+        entry = Gtk.Entry()
+        entry.set_placeholder_text("host1, host2, host3")
+
+        box.add(info)
+        box.add(entry)
+
+        def on_activate(entry):
+            text = entry.get_text()
+            hosts = [h.strip() for h in text.split(",") if h.strip()]
+
+            if not hosts:
+                return
+
+            first = True
+            current_terminal = terminal
+
+            for host in hosts:
+                if first:
+                    current_terminal.feed(f"ssh {host}\n")
+                    first = False
+                else:
+                    # split and use new terminal
+                    current_terminal.emit('split-horiz')
+                    # Terminator internally focuses new terminal
+                    new_term = current_terminal.get_toplevel().get_focussed_terminal()
+                    new_term.feed(f"ssh {host}\n")
+                    current_terminal = new_term
+
+            dialog.destroy()
+
+        entry.connect("activate", on_activate)
+
+        dialog.show_all()

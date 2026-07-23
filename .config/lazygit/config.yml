@@ -1,0 +1,104 @@
+promptToReturnFromSubprocess: false
+git:
+  overrideGpg: true
+  commit:
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+gui:
+  border: rounded
+  showIcons: true
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.4
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 5
+  shrinkSidePanelsToContent: false
+  mainPanelSplitMode: flexible
+  enlargedSideViewLocation: left
+  showCommandLog: true
+  showBottomLine: true
+  showPanelJumps: true
+  showListFooter: true
+  scrollHeight: 2
+  scrollOffMargin: 2
+  scrollOffBehavior: margin
+  sidePanels:
+    - [status]
+    - [files, worktrees]
+    - [commits, stash]
+    - [branches, remotes, tags]
+    - [reflog]
+  theme:
+    activeBorderColor:
+      - cyan
+      - bold
+    inactiveBorderColor:
+      - "#ADADAD"
+    searchingActiveBorderColor:
+      - "#7aa2f7"
+      - bold
+    selectedLineBgColor:
+      - "#2A2A2A"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    optionsTextColor:
+      - cyan
+    defaultFgColor:
+      - default
+    cherryPickedCommitFgColor:
+      - blue
+    cherryPickedCommitBgColor:
+      - cyan
+    markedBaseCommitFgColor:
+      - blue
+    markedBaseCommitBgColor:
+      - yellow
+    unstagedChangesColor:
+      - red
+  commitAuthorShortLength: 2
+  commitAuthorLongLength: 20
+  commitHashLength: 8
+  splitDiff: always
+  wrapLinesInStagingView: true
+  useHunkModeInStagingView: true
+  showNumstatInFilesView: true
+  showFileTree: true
+  showRootItemInFileTree: false
+  fileTreeSortOrder: mixed
+customCommands:
+  - key: "F"
+    context: "files"
+    command: "git log --follow --stat -- {{.SelectedFile.Name}}"
+    description: "File history"
+    output: terminal
+  - key: "B"
+    context: "files"
+    command: "vim '+Git blame {{.SelectedFile.Name}}' {{.SelectedFile.Name}}"
+    description: "Blame file"
+    output: terminal
+  - key: "L"
+    context: "commits"
+    command: "git show --stat --summary {{.SelectedLocalCommit.Sha}}"
+    description: "Show commit summary"
+    output: terminal
+  - key: "H"
+    context: "commits"
+    command: "git show --name-only --format=fuller {{.SelectedLocalCommit.Sha}}"
+    description: "Show changed files in commit"
+    output: terminal
+  - key: "V"
+    context: "commitFiles"
+    command: "vim '+Git blame {{.SelectedCommitFile.Name}}' {{.SelectedCommitFile.Name}}"
+    description: "Blame committed file in Vim"
+    output: terminal
+  - key: "o"
+    context: "commits"
+    description: "Open commit in code"
+    command: |
+      bash -lc '
+        remote="$(git remote get-url origin)"
+        repo="$(printf "%s" "$remote" | sed -E "s#(git@|ssh://git@|https://)([^/:]+)[:/]([^/]+/[^/.]+)(\.git)?#\3#")"
+        open "https://code.logobject.ch/${repo}/commit/{{.SelectedLocalCommit.Sha}}"
+      '
+keybinding:
+  universal:
+    openDiffTool: t
