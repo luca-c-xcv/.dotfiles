@@ -1,0 +1,78 @@
+#!/bin/bash
+
+
+function _social(){
+	# open windows structure
+	#~/.local/bin/openlayout 11 W_social
+
+  # open slack
+  #slack &
+		
+	# open thunderbird
+  #thunderbird &
+  echo ''
+}
+
+function _extra(){
+	# open arand in workspace 1
+	# i3-msg "workspace 1"; x-terminal-emulator &
+  #i3-msg "workspace 8"; /home/luca/Applications/Obsidian/obsidian.AppImage &
+  echo ''
+}
+
+function _openWorkApps(){
+  echo ''
+# pkill dunst; notify-send '-'
+}
+
+
+#################	
+### FUNCTIONS ###
+#################
+
+# set devices settings 
+function settings() {
+	# set tupping enabled
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled" 1
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled Default" 1
+	# set speedup cursor at maximum
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" '350' 1
+  echo ''
+}
+
+# open essential tools
+function tools() {
+	# set background
+	#~/.local/bin/feh_cw &
+	#feh --bg-fill $HOME/Pictures/wallpaper/background-2.jpg 
+
+  # open redshift
+	#/usr/bin/redshift &
+
+  # open diodon (clipboard history)
+	#/usr/bin/diodon &
+
+  # open gromit (tool to write on live screen)
+  #gromit-mpx &
+  echo ''
+}
+
+# open essential apps
+function startup_apps(){
+	_social
+	_extra
+	sleep 2
+	_openWorkApps
+
+  feh --bg-fill /home/luca/Pictures/wallpaper/wallpaper-9.jpg
+}
+
+
+function main(){
+	settings
+	tools
+	startup_apps
+}
+
+sleep 3
+main "$@"

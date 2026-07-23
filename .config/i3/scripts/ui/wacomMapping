@@ -1,0 +1,15 @@
+#!/bin/bash
+
+getActiveMonitors=$(xrandr --listactivemonitors --current | sed "1d" | awk {'print $4'})
+
+getTabId=$(xinput list | grep "Pen stylus" | grep -o "id=[0-9]*" | sed "s/id=//")
+
+function main(){
+    in=$(echo -e "$getActiveMonitors" | rofi -dmenu -p "Active Screen" -config ~/.config/rofi/rofidmenu.rasi)
+
+    if [ $in ]; then
+        xsetwacom set $getTabId MapToOutput $in
+    fi
+}
+
+main $@
