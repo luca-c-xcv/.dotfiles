@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+function _social(){
+	# open windows structure
+	~/.local/bin/openlayout 11 W_social
+
+	sleep 1
+	
+	setsid /opt/thunderbird/thunderbird &
+	setsid teams-for-linux &
+	setsid /opt/brave.com/brave/brave-browser --profile-directory=Default --app-id=bfkhhpicndnmmndblmefhojgcmcfkcml &
+}
+
+function _extra(){
+	i3-msg 'workspace 4;layout tabbed;exec dolphin ~/;exec terminator -l LogObject'
+}
+
+function _openWorkApps(){
+  echo ''
+}
+
+
+#################	
+### FUNCTIONS ###
+#################
+
+# set devices settings 
+function settings() {
+  feh --bg-fill ~/Pictures/wallpaper/background-16.jpg
+
+	# set tupping enabled
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled" 1
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled Default" 1
+	# set speedup cursor at maximum
+	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" '350' 1
+}
+
+# open essential tools
+function tools() {
+  # open gromit (tool to write on live screen)
+  gromit-mpx &
+  i3-msg 'workspace 8; exec /opt/Obsidian/obsidian.AppImage'
+}
+
+# open essential apps
+function startup_apps(){
+	_social
+	_extra
+	sleep 2
+	_openWorkApps
+}
+
+function complete_startup(){
+    cd $HOME/Develop/git
+    ./pull-all.sh ./server
+    ./pull-all.sh ./db
+}
+
+function main(){
+	settings
+	tools
+	startup_apps
+  complete_startup
+}
+
+sleep 2
+main "$@"

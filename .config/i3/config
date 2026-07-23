@@ -1,0 +1,426 @@
+#############
+# VARIABLES #
+#############
+set $super  Mod4
+set $alt    Mod1
+
+# Define name for default screens
+set $internal "eDP-1" "eDP-1-1"
+set $external "HDMI2" "HDMI-1-0"
+set $dockC 		"DVI-I-1-1" "DVI-I-5-4" "DVI-I-3-2"
+set $dockR 		"DVI-I-2-2" "DVI-I-4-3" "DVI-I-2-1"
+set $hubL 		"DP-1-2" "DP-1-1-2"
+set $hubC 		"DP-1-1" "DP-1-1-1"
+
+# Define names for default workspaces for which we configure key bindings later on.
+set $ws1    "1"
+set $ws2    "2"
+set $ws3    "3"
+set $ws4    "4"
+set $ws5    "5"
+set $ws6    "6"
+set $ws7    "7"
+set $ws8    "8"
+set $ws9    "9"
+set $ws10   "10"
+set $ws11   "11"
+set $ws12   "12"
+set $ws13   "13"
+set $ws14   "14"
+set $ws15   "15"
+set $ws16   "16"
+set $ws17   "17"
+set $ws18   "18"
+set $ws19   "19"
+set $ws20   "20"
+set $ws21   "21"
+set $ws22   "22"
+
+###################
+# WORSPACE OUTPUT #
+###################
+workspace $ws1      output  $dockC       $hubL      $internal     $external 
+workspace $ws3      output  $dockC       $hubL      $internal     $external 
+workspace $ws5      output  $dockC       $hubL      $internal     $external
+workspace $ws7      output  $dockC       $hubL      $internal     $external
+workspace $ws9      output  $dockC       $hubL      $internal     $external
+workspace $ws11     output  $internal    $external  $dockC
+workspace $ws13     output  $internal    $external
+workspace $ws15     output  $internal    $external
+workspace $ws17     output  $internal    $external
+workspace $ws19     output  $internal    $external 
+workspace $ws21     output  $dockC       $hubL      $internal     $external
+
+workspace $ws2      output  $dockR       $hubC       $external    $internal
+workspace $ws4      output  $dockR       $hubC       $external    $internal
+workspace $ws6      output  $dockR       $hubC       $external    $internal
+workspace $ws8      output  $dockR       $hubC       $external    $internal
+workspace $ws10     output  $dockR       $hubC       $external    $internal
+workspace $ws12     output  $external    $internal
+workspace $ws14     output  $external    $internal
+workspace $ws16     output  $external    $internal
+workspace $ws18     output  $external    $internal
+workspace $ws20     output  $dockR       $hubC       $external    $internal
+workspace $ws22     output  $dockR       $hubC       $external    $internal
+
+###########
+# BINDING #
+###########
+# terminal
+bindsym $super+Return exec /usr/bin/x-terminal-emulator
+
+# default browser
+bindsym $super+b exec gtk-launch $(xdg-settings get default-web-browser)
+
+# rofi app select
+bindsym $super+Shift+space exec rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+
+# rofi command run
+bindsym $super+Shift+Ctrl+space exec rofi -show run -config ~/.config/rofi/rofidmenu.rasi
+
+# krunner
+bindsym $super+Ctrl+space exec krunner
+
+# window list 
+bindsym $super+w exec rofi -show window -config ~/.config/rofi/rofidmenu.rasi
+
+# focus parent container
+bindsym $super+a focus parent
+
+# focus child container
+bindsym $super+z focus child
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
+# switch to workspace
+bindsym $super+1    workspace   $ws1
+bindsym $super+2    workspace   $ws2
+bindsym $super+3    workspace   $ws3
+bindsym $super+4    workspace   $ws4
+bindsym $super+5    workspace   $ws5
+bindsym $super+6    workspace   $ws6
+bindsym $super+7    workspace   $ws7
+bindsym $super+8    workspace   $ws8
+bindsym $super+9    workspace   $ws9
+bindsym $super+0    workspace   $ws10
+bindsym $super+F1   workspace   $ws11
+bindsym $super+F2   workspace   $ws12
+bindsym $super+F3   workspace   $ws13
+bindsym $super+F4   workspace   $ws14
+bindsym $super+F5   workspace   $ws15
+bindsym $super+F6   workspace   $ws16
+bindsym $super+F7   workspace   $ws17
+bindsym $super+F8   workspace   $ws18
+bindsym $super+F9   workspace   $ws19
+bindsym $super+F10   workspace   $ws20
+bindsym $super+F11   workspace   $ws21
+bindsym $super+F12   workspace   $ws22
+
+# next workspace
+bindsym $super+Tab workspace next
+
+# next workspace on output
+bindsym $super+Ctrl+Tab workspace next_on_output
+
+# previous orkspace 
+bindsym $super+Shift+Tab workspace prev
+
+# previous workspace on output
+bindsym $super+Ctrl+Shift+Tab workspace prev_on_output
+
+# show scratchpad
+bindsym $super+Ctrl+v scratchpad show
+
+# move to scratchpad
+bindsym $super+Ctrl+n move to scratchpad
+
+# change window position
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
+
+# change containing workspace
+bindsym $super+Ctrl+Shift+Left move workspace to output left
+bindsym $super+Ctrl+Shift+Down move workspace to output down
+bindsym $super+Ctrl+Shift+Up move workspace to output up
+bindsym $super+Ctrl+Shift+Right move workspace to output right
+
+# split vertical window
+bindsym $super+v split vertical
+
+# split horizontal window
+bindsym $super+g split horizontal
+
+# toggle split window
+bindsym $super+BackSpace split toggle
+
+# window fullscreen toggle
+bindsym $super+f fullscreen toggle
+
+# window floating toggle
+bindsym $super+Shift+f floating toggle
+
+# tile/float/focus toggle
+bindsym $super+Shift+t focus mode_toggle
+
+# window layout mode
+bindsym $super+t layout toggle tabbed splith splitv
+
+# move window to workspace 1 - 19
+bindsym $super+Shift+1  move container to workspace number $ws1
+bindsym $super+Shift+2  move container to workspace number $ws2
+bindsym $super+Shift+3  move container to workspace number $ws3
+bindsym $super+Shift+4  move container to workspace number $ws4
+bindsym $super+Shift+5  move container to workspace number $ws5
+bindsym $super+Shift+6  move container to workspace number $ws6
+bindsym $super+Shift+7  move container to workspace number $ws7
+bindsym $super+Shift+8  move container to workspace number $ws8
+bindsym $super+Shift+9  move container to workspace number $ws9
+bindsym $super+Shift+0  move container to workspace number $ws10
+bindsym $super+Shift+F1 move container to workspace number $ws11
+bindsym $super+Shift+F2 move container to workspace number $ws12
+bindsym $super+Shift+F3 move container to workspace number $ws13
+bindsym $super+Shift+F4 move container to workspace number $ws14
+bindsym $super+Shift+F5 move container to workspace number $ws15
+bindsym $super+Shift+F6 move container to workspace number $ws16
+bindsym $super+Shift+F7 move container to workspace number $ws17
+bindsym $super+Shift+F8 move container to workspace number $ws18
+bindsym $super+Shift+F9 move container to workspace number $ws19
+bindsym $super+Shift+F10 move container to workspace number $ws20
+bindsym $super+Shift+F11 move container to workspace number $ws21
+bindsym $super+Shift+F12 move container to workspace number $ws22
+
+
+# move focused container to workspace, move to workspace
+bindsym $super+$alt+1   move container to workspace number $ws1; workspace number $ws1
+bindsym $super+$alt+2   move container to workspace number $ws2; workspace number $ws2
+bindsym $super+$alt+3   move container to workspace number $ws3; workspace number $ws3
+bindsym $super+$alt+4   move container to workspace number $ws4; workspace number $ws4
+bindsym $super+$alt+5   move container to workspace number $ws5; workspace number $ws5
+bindsym $super+$alt+6   move container to workspace number $ws6; workspace number $ws6
+bindsym $super+$alt+7   move container to workspace number $ws7; workspace number $ws7
+bindsym $super+$alt+8   move container to workspace number $ws8; workspace number $ws8
+bindsym $super+$alt+9   move container to workspace number $ws9; workspace number $ws9
+bindsym $super+$alt+0   move container to workspace number $ws10; workspace number $ws10
+bindsym $super+$alt+F1  move container to workspace number $ws11; workspace number $ws11
+bindsym $super+$alt+F2  move container to workspace number $ws12; workspace number $ws12
+bindsym $super+$alt+F3  move container to workspace number $ws13; workspace number $ws13
+bindsym $super+$alt+F4  move container to workspace number $ws14; workspace number $ws14
+bindsym $super+$alt+F5  move container to workspace number $ws15; workspace number $ws15
+bindsym $super+$alt+F6  move container to workspace number $ws16; workspace number $ws16
+bindsym $super+$alt+F7  move container to workspace number $ws17; workspace number $ws17
+bindsym $super+$alt+F8  move container to workspace number $ws18; workspace number $ws18
+bindsym $super+$alt+F9  move container to workspace number $ws19; workspace number $ws19
+bindsym $super+$alt+F10  move container to workspace number $ws19; workspace number $ws20
+bindsym $super+$alt+F11  move container to workspace number $ws19; workspace number $ws21
+bindsym $super+$alt+F12  move container to workspace number $ws19; workspace number $ws22
+
+
+
+# exit app
+bindsym $super+q kill
+
+# kill app
+bindsym $super+Ctrl+q exec --no-startup-id kill -9 $(xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) _NET_WM_PID | awk '{print $3}')
+
+# reload i3
+bindsym $super+Shift+r reload
+
+# restart i3
+bindsym $super+Ctrl+r restart
+
+# power menu
+bindsym $super+Shift+p exec --no-startup-id ~/.config/i3/scripts/ui/powermenu
+
+# lock screen
+#bindsym $super+Shift+Escape exec i3lock-fancy
+#bindsym $super+Shift+Escape exec dbus-launch qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock
+bindsym $super+Shift+Escape exec --no-startup-id kstart5 loginctl lock-session
+
+
+
+# suspend
+bindsym $super+Ctrl+Escape exec systemctl suspend
+
+# gnome-control-center
+bindsym $super+c exec  plasma-open-settings 
+#--class=floating_window
+
+# file manager
+bindsym $super+n exec /usr/bin/dolphin
+
+# notification viewer
+# bindsym $super+Shift+n exec --no-startup-id dunstctl history-pop
+
+# close all notification
+# bindsym $super+Shift+Ctrl+n exec --no-startup-id dunstctl close-all
+
+# toggle bar
+bindsym $super+i bar mode toggle
+
+# area screenshot
+#bindsym --release Print exec gnome-screenshot
+bindsym Print exec flameshot gui -c -p $HOME/Pictures/Screenshots/
+
+
+# screen screenshot
+#bindsym --release Shift+Print exec gnome-screenshot -a
+bindsym Shift+Print exec flameshot screen -c -p $HOME/Pictures/Screenshots/
+
+# window screenshot
+#bindsym --release Ctrl+Print exec gnome-screenshot -w
+bindsym Ctrl+Print exec flameshot full
+
+# volume keybinding
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle #mic mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% # raising
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% # lowering
+
+# media controller keybinding
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause # toggle play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause # toggle play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next # forward song
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous # backward song
+# bindsym XF86MonBrightnessDown  exec --no-startup-id ~/.config/i3/scripts/bar/redlight2 down # brighness down
+# bindsym XF86MonBrightnessUp  exec --no-startup-id ~/.config/i3/scripts/bar/redlight2 up # brightness up
+# bindsym XF86Explorer exec --no-startup-id ~/.config/i3/scripts/bar/redlight2 toggle # toggle screen on/off 
+
+# bindsym $super+d exec --no-startup-id ~/.config/i3/scripts/bar/brightness
+
+# extra shortcut
+bindsym $super+Shift+b exec ~/.config/i3/scripts/ui/browser_selector
+bindsym $super+$alt+l exec ~/.config/i3/scripts/ui/rofiLooks
+bindsym $super+Shift+Return exec code
+bindsym $super+Shift+l exec ~/.config/i3/scripts/ui/openlayout_shortcut
+#bindsym $super+Shift+m exec ~/.local/bin/espace
+#bindsym $super+Shift+v exec /usr/bin/diodon
+bindsym $super+Shift+e exec /opt/eclipse/eclipse
+bindsym $super+Shift+g exec /opt/smartgit/bin/smartgit.sh
+bindsym $super+Ctrl+g exec terminator --working-directory=$HOME/Develop/git
+bindsym $super+Shift+d exec ~/.local/bin/dbeaver
+#bindsym $super+$alt+Ctrl+space exec $HOME/.config/i3/scripts/ui/changeKeyboardLayout
+bindsym $super+Ctrl+Return exec terminator -l LogObject2
+bindsym $super+Shift+w exec ~/.config/i3/scripts/ui/wacomMapping
+
+# resize
+mode "Resize Mode" 
+{
+	bindsym Left resize shrink width 4 px or 4 ppt
+	bindsym Down resize grow height 4 px or 4 ppt
+	bindsym Up resize shrink height 4 px or 4 ppt
+	bindsym Right resize grow width 4 px or 4 ppt
+
+	bindsym Shift+Left resize shrink width 12 px or 12 ppt
+	bindsym Shift+Down resize grow height 12 px or 12 ppt
+	bindsym Shift+Up resize shrink height 12 px or 12 ppt
+	bindsym Shift+Right resize grow width 12 px or 12 ppt
+
+	bindsym minus gaps inner current minus 4
+	bindsym plus gaps inner current plus 4
+	bindsym Shift+minus gaps inner current minus 12
+	bindsym Shift+plus gaps inner current plus 12
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $super+r mode "default"
+}
+bindsym $super+r mode "Resize Mode"
+bindsym $super+Ctrl+$alt+Left resize shrink width 3 px or 3 ppt
+bindsym $super+Ctrl+$alt+Down resize grow height 3 px or 3 ppt
+bindsym $super+Ctrl+$alt+Up resize shrink height 3 px or 3 ppt
+bindsym $super+Ctrl+$alt+Right resize grow width 3 px or 3 ppt
+bindsym $super+Ctrl+$alt+minus gaps inner current minus 3
+bindsym $super+Ctrl+$alt+plus gaps inner current plus 3
+
+
+###########################
+# appearance and behavior #
+###########################
+floating_modifier $super
+floating_maximum_size -1 x -1
+
+for_window [class="floating_window"] floating enable
+for_window [class="(?i)Yad"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Gnome-control-center"] floating enable
+for_window [class="Gnome-calculator"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="KeePass2"] floating enable
+
+
+### KDE CONFIGURATIONS
+exec --no-startup-id plasmashell
+for_window [title="Desktop - Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable
+for_window [title="Desktop — Plasma"] kill, floating enable, border none
+for_window [class="plasmashell"] floating enable
+for_window [class="Plasma"] floating enable, border none
+for_window [title="plasma-desktop"] floating enable, border none
+for_window [title="win7"] floating enable, border none
+for_window [class="krunner"] floating enable, border none
+for_window [class="Kmix"] floating enable, border none
+for_window [class="Klipper"] floating enable, border none
+for_window [class="Plasmoidviewer"] floating enable, border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+for_window [window_role="Msgcompose" class="(?i)Thunderbird"] floating enable, border none
+no_focus [class="plasmashell" window_type="notification"]
+
+
+workspace_auto_back_and_forth no
+
+hide_edge_borders smart
+
+
+workspace_layout default
+
+# Disable titlebar
+for_window [class="^.*"] border pixel 1
+title_align center
+default_border none
+default_floating_border pixel 1
+
+# Specify the distance between windows in pixels
+gaps inner 4
+gaps outer 3
+
+# Enable popup during fullscreen
+popup_during_fullscreen smart
+
+# window focus follows your mouse movements as the mouse crosses window borders
+focus_follows_mouse no
+
+#set theme
+include $HOME/.config/i3/themes/dark.conf
+
+###############################
+# External programs to launch #
+###############################
+
+# Start dunst for notifications
+#exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
+
+# Hide the mouse pointer if unused for a duration
+exec --no-startup-id /usr/bin/unclutter -b
+
+# Load nm-applet to provide auth dialogs for network access
+#exec --no-startup-id /usr/bin/nm-applet
+
+# load blueman-applet to handle and see the bluetooth status
+#exec --no-startup-id /usr/bin/blueman-applet
+
+# load picom
+# exec --no-startup-id /usr/bin/picom --config ~/.config/picom/config
+
+# set lockscreen & screensaver
+# exec "xautolock -detectsleep -time 5 -locker \"~/.config/i3/scripts/ui/lock\"" #lock
+#exec "xset s 300; xset s blank" #screensaver
+
+## startup applications
+exec --no-startup-id ~/.config/i3/startup

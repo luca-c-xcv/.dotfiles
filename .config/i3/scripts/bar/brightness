@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get the current brightness level
+current_brightness=$(brightnessctl get)
+max_brightness=$(brightnessctl max)
+
+# Set brightness to 0 if it's above 0, otherwise restore to max brightness
+if [ "$current_brightness" -gt 0 ]; then
+    brightnessctl set 0
+else
+    brightnessctl set "$max_brightness"
+fi

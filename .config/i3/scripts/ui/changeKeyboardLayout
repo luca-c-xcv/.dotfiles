@@ -1,0 +1,67 @@
+#!/bin/bash
+
+currentlayout=$(setxkbmap -query | grep layout | awk {'print $2'})
+currentvariants=$(setxkbmap -query | grep variants | awk {'print $2'})
+currentoptions=$(setxkbmap -query | grep options | awk {'print $2'})
+
+layouts=$(localectl list-x11-keymap-layouts | sort)
+variants=$(localectl list-x11-keymap-variants | sort)
+options=$(localectl list-x11-keymap-options | sort)
+
+arraylayouts=($layouts)
+arrayvariants=($variants)
+arrayoptions=($options)
+
+#echo "${arraylayouts[@]}"
+#echo $layouts
+for i in "${!arraylayouts[@]}"; do
+    if [ "${arraylayouts[i]}" == "$currentlayout" ]; then
+        unset arraylayouts[i]
+        arraylayouts=("(*)$currentlayout" "${arraylayouts[@]}")
+        break
+    fi
+done
+	
+for i in "${!arrayvariants[@]}"; do
+    if [ "${arrayvariants[i]}" == "$currentvariants" ]; then
+        unset arrayvariants[i]
+        arrayvariants=("(*)$currentvariants" "${arrayvariants[@]}")
+        break
+    fi
+done	
+
+
+for i in "${!arrayoptions[@]}"; do
+    if [ "${arrayoptions[i]}" == "$currentoptions" ]; then
+        unset arrayoptions[i]
+        arrayoptions=("(*)$currentoptions" "${arrayoptions[@]}")
+        break
+    fi
+done	
+
+
+
+
+inL=$(printf '%s\n' "${arraylayouts[@]}" | rofi -dmenu -p "Keyboard mapping layouts" -config ~/.config/rofi/rofidmenu.rasi)
+inV=$(printf '%s\n' "${arrayvariants[@]}" | rofi -dmenu -p "Keyboard mapping variants" -config ~/.config/rofi/rofidmenu.rasi)
+inO=$(printf '%s\n' "${arrayoptions[@]}" | rofi -dmenu -p "Keyboard mapping option" -config ~/.config/rofi/rofidmenu.rasi)
+
+command=""
+
+if [ $inL ]; then
+    command="${command} -layout $inL"
+fi
+if [ $inV ]; then
+    command="${command} -variant $inV"
+fi
+if [ $inO ]; then
+    command="${command} -option $inO"
+fi
+
+if [ "$command" != "" ]; then
+    commandclean=$(echo "$command" | sed 's/(\(\*\))//g')
+    #echo $commandclean
+    setxkbmap $commandclean
+fi	
+	
+
