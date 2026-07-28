@@ -1,6 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- Customize Mason
+-- Customize Mason - Auto-install Java development tools
 
 ---@type LazySpec
 return {
@@ -13,12 +11,19 @@ return {
       ensure_installed = {
         -- install language servers
         "lua-language-server",
-
+        "jdtls",                  -- Java Language Server
+        
         -- install formatters
         "stylua",
+        "google-java-format",     -- Java formatter
 
         -- install debuggers
         "debugpy",
+        "java-debug-adapter",     -- Java debugger
+        "java-test",              -- Java test runner
+
+        -- install linters
+        "checkstyle",             -- Java linter
 
         -- install any other package
         "tree-sitter-cli",

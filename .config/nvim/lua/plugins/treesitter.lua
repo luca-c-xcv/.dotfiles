@@ -1,6 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- Customize Treesitter
+-- Customize Treesitter - Add Java support
 
 ---@type LazySpec
 return {
@@ -9,7 +7,17 @@ return {
     ensure_installed = {
       "lua",
       "vim",
-      -- add more arguments for adding more treesitter parsers
+      "java",           -- Java syntax
+      "xml",            -- For build.xml, pom.xml
+      "yaml",           -- For yaml configs
+      "json",           -- For JSON configs
+      "bash",           -- For shell scripts
+    },
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
     },
   },
 }
