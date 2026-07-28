@@ -1,0 +1,61 @@
+#!/bin/sh
+
+file="$1"
+
+case "$(file -Lb --mime-type "$file")" in
+
+    text/*)
+        if command -v bat >/dev/null; then
+            bat --color=always --style=numbers --line-range=:200 "$file"
+        else
+            sed -n '1,200p' "$file"
+        fi
+        ;;
+
+    application/json)
+        if command -v jq >/dev/null; then
+            jq . "$file"
+        fi
+        ;;
+
+    application/pdf)
+        if command -v pdftotext >/dev/null; then
+            pdftotext "$file" - | sed -n '1,200p'
+        fi
+        ;;
+
+    image/*)
+        if command -v chafa >/dev/null; then
+            chafa --format symbols "$file"
+        else
+            file "$file"
+        fi
+        ;;
+
+    video/*)
+        if command -v ffmpegthumbnailer >/dev/null; then
+            ffmpegthumbnailer -i "$file" -o /tmp/lf-thumb.jpg -s 0
+            chafa /tmp/lf-thumb.jpg
+        else
+            file "$file"
+        fi
+        ;;
+
+    audio/*)
+        if command -v mediainfo >/dev/null; then
+            mediainfo "$file"
+        else
+            file "$file"
+        fi
+        ;;
+
+    application/zip|application/x-tar|application/gzip|application/x-bzip2|application/x-xz)
+        if command -v tar >/dev/null; then
+            tar tf "$file" | sed -n '1,100p'
+        fi
+        ;;
+
+    *)
+        file "$file"
+        ;;
+esac

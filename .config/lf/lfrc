@@ -1,0 +1,19 @@
+set shell bash
+set icons true
+set scrolloff 10
+set mouse true
+set drawbox true
+set preview true
+set preserve true
+set watch true
+set info time:size
+set previewer ~/.config/lf/previewer
+
+
+
+cmd newfile ${{
+    printf "New file: "
+    read filename
+    vim "$(realpath "$filename")"
+}}
+map n newfile
