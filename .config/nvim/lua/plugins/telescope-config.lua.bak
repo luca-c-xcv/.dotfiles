@@ -1,0 +1,35 @@
+-- Telescope configuration with grep fallback
+-- This allows using grep if ripgrep is not installed
+
+---@type LazySpec
+return {
+  "nvim-telescope/telescope.nvim",
+  opts = function(_, opts)
+    local actions = require("telescope.actions")
+    
+    return require("astrocore").extend_tbl(opts, {
+      defaults = {
+        -- Use vimgrep as fallback if ripgrep not available
+        vimgrep_arguments = {
+          "grep",
+          "-r",
+          "-n",
+          "-H",
+          "--exclude-dir=.git",
+          "--exclude-dir=node_modules",
+          "--exclude-dir=.venv",
+          "--exclude=*.min.js",
+          "--exclude=*.min.css",
+        },
+      },
+      pickers = {
+        live_grep = {
+          -- Fallback to grep if ripgrep not found
+          additional_args = function()
+            return { "--ignore-case" }
+          end,
+        },
+      },
+    })
+  end,
+}

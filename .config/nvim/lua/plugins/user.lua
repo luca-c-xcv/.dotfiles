@@ -1,88 +1,101 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- You can also add or configure plugins by creating files in this `plugins/` folder
--- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
--- Here are some examples:
+-- User plugins configuration
+-- Migrated from Vim + additional modern Neovim plugins
 
 ---@type LazySpec
 return {
 
-  -- == Examples of Adding Plugins ==
-
-  "andweeb/presence.nvim",
+  -- GIT INTEGRATION (keeping vim-fugitive from your .vimrc)
   {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
+    "tpope/vim-fugitive",
+    cmd = { "Git", "Gdiffsplit", "Gvdiffsplit", "Gwrite", "Gread" },
+  },
+  
+  -- LAZYGIT INTEGRATION - Beautiful floating terminal
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      { "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", desc = "LazyGit Current File" },
+      { "<leader>gc", "<cmd>LazyGitConfig<cr>", desc = "LazyGit Config" },
+    },
+  },
+  
+  -- GIT CONFLICT MARKERS (from your .vimrc)
+  {
+    "rhysd/conflict-marker.vim",
+    event = "BufReadPost",
   },
 
-  -- == Examples of Overriding Plugins ==
+  -- BETTER MULTIPLE CURSORS (replaces vim-multiple-cursors)
+  {
+    "mg979/vim-visual-multi",
+    event = "BufReadPost",
+    keys = {
+      { "<C-n>", mode = { "n", "v" }, desc = "Add cursor" },
+    },
+  },
 
-  -- customize dashboard options
+  -- EDITORCONFIG SUPPORT - DISABLED (Neovim has native support)
+  -- If you have issues, this plugin is disabled. Use native EditorConfig instead.
+  {
+    "editorconfig/editorconfig-vim",
+    enabled = false,  -- Disabled - use Neovim's native EditorConfig
+  },
+
+  -- COLORSCHEME (migrated from darcula in .vimrc)
+  {
+    "doums/darcula",
+    lazy = false,
+    priority = 1000,
+  },
+
+  -- ALTERNATIVE: JetBrains theme (from your .vimrc)
+  {
+    "devsjc/vim-jb",
+    lazy = true,
+  },
+
+  -- ICONS (already better integrated in AstroNvim)
+  -- Note: nvim-web-devicons is already included, better than vim-devicons
+
+  -- TELESCOPE ENHANCEMENTS (replaces fzf from .vimrc, but better)
+  -- Telescope is already in AstroNvim, this just adds fzf native sorter
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
+
+  -- CUSTOMIZE DASHBOARD
   {
     "folke/snacks.nvim",
     opts = {
       dashboard = {
         preset = {
           header = table.concat({
-            " █████  ███████ ████████ ██████   ██████ ",
-            "██   ██ ██         ██    ██   ██ ██    ██",
-            "███████ ███████    ██    ██████  ██    ██",
-            "██   ██      ██    ██    ██   ██ ██    ██",
-            "██   ██ ███████    ██    ██   ██  ██████ ",
-            "",
-            "███    ██ ██    ██ ██ ███    ███",
-            "████   ██ ██    ██ ██ ████  ████",
-            "██ ██  ██ ██    ██ ██ ██ ████ ██",
-            "██  ██ ██  ██  ██  ██ ██  ██  ██",
-            "██   ████   ████   ██ ██      ██",
+            "╔═══════════════════════════════════════╗",
+            "║                                       ║",
+            "║   Welcome to Neovim, Luca! 🚀         ║",
+            "║                                       ║",
+            "║   Migrated from Vim with ❤️            ║",
+            "║                                       ║",
+            "╚═══════════════════════════════════════╝",
           }, "\n"),
         },
       },
     },
-  },
-
-  -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
-
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  {
-    "L3MON4D3/LuaSnip",
-    config = function(plugin, opts)
-      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom luasnip configuration such as filetype extend or custom snippets
-      local luasnip = require "luasnip"
-      luasnip.filetype_extend("javascript", { "javascriptreact" })
-    end,
-  },
-
-  {
-    "windwp/nvim-autopairs",
-    config = function(plugin, opts)
-      require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom autopairs configuration such as custom rules
-      local npairs = require "nvim-autopairs"
-      local Rule = require "nvim-autopairs.rule"
-      local cond = require "nvim-autopairs.conds"
-      npairs.add_rules(
-        {
-          Rule("$", "$", { "tex", "latex" })
-            -- don't add a pair if the next character is %
-            :with_pair(cond.not_after_regex "%%")
-            -- don't add a pair if  the previous character is xxx
-            :with_pair(
-              cond.not_before_regex("xxx", 3)
-            )
-            -- don't move right when repeat character
-            :with_move(cond.none())
-            -- don't delete if the next character is xx
-            :with_del(cond.not_after_regex "xx")
-            -- disable adding a newline when you press <cr>
-            :with_cr(cond.none()),
-        },
-        -- disable for .vim files, but it work for another filetypes
-        Rule("a", "a", "-vim")
-      )
-    end,
   },
 }
