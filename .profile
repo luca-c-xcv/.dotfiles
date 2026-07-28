@@ -35,3 +35,6 @@ export GTK3_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
 
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export EDITOR=vim
+export VISUAL=vim
+export ENV_TYPE="work"
