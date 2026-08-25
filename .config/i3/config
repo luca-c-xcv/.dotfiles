@@ -7,8 +7,8 @@ set $alt    Mod1
 # Define name for default screens
 set $internal "eDP-1" "eDP-1-1"
 set $external "HDMI2" "HDMI-1-0"
-set $dockC 		"DVI-I-1-1" "DVI-I-5-4" "DVI-I-3-2"
-set $dockR 		"DVI-I-2-2" "DVI-I-4-3" "DVI-I-2-1"
+set $dockC 		"DVI-I-1-1" "DVI-I-5-4" "DVI-I-2-1"
+set $dockR 		"DVI-I-2-2" "DVI-I-4-3" "DVI-I-3-2"
 set $hubL 		"DP-1-2" "DP-1-1-2"
 set $hubC 		"DP-1-1" "DP-1-1-1"
 

@@ -13,7 +13,8 @@ function _social(){
 }
 
 function _extra(){
-	i3-msg 'workspace 4;layout tabbed;exec dolphin ~/;exec terminator -l LogObject'
+#	i3-msg 'workspace 4;layout tabbed;exec dolphin ~/;exec terminator -l LogObject'
+  echo ''
 }
 
 function _openWorkApps(){
@@ -52,9 +53,10 @@ function startup_apps(){
 }
 
 function complete_startup(){
-    cd $HOME/Develop/git
-    ./pull-all.sh ./server
-    ./pull-all.sh ./db
+#    cd $HOME/Develop/git
+#    ./pull-all.sh ./server
+#    ./pull-all.sh ./db
+  echo ''
 }
 
 function main(){
