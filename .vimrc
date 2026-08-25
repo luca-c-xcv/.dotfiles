@@ -37,7 +37,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim' " interactive filter program for any kind of list;
 Plugin 'terryma/vim-multiple-cursors' " multiple cursor
 Plugin 'liuchengxu/vista.vim' " outline
-
+Plugin 'iamcco/markdown-preview.nvim' " markdown preview
 
 " }}}
 " END PLUGIN LIST -----------------------------------------
