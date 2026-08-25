@@ -11,7 +11,7 @@ return {
     },
     formatting = {
       format_on_save = {
-        enabled = true,
+        enabled = false,  -- Disabled to prevent freezing
       },
       timeout_ms = 1000,
     },

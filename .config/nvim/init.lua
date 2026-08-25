@@ -58,3 +58,18 @@ map("n", "<C-\\>", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 map({ "n", "v" }, "<leader>d", '"+d', { desc = "Delete to system clipboard" })
 map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+
+-- Ctrl+Arrow word navigation (map Terminator's escape sequences)
+-- Terminator sends <80><fd>V for Ctrl+Right and <80><fd>U for Ctrl+Left
+map("n", "\x80\xfdV", "w", { noremap = true, desc = "Move to next word" })
+map("n", "\x80\xfdU", "b", { noremap = true, desc = "Move to previous word" })
+map("i", "\x80\xfdV", "<C-o>w", { noremap = true, desc = "Move to next word in insert mode" })
+map("i", "\x80\xfdU", "<C-o>b", { noremap = true, desc = "Move to previous word in insert mode" })
+
+-- Enable scrollbind for merge conflicts (synched scrolling in splits)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gitcommit,gitrebase,gitconfig,gitsendemail,git",
+  callback = function()
+    vim.opt.scrollbind = true
+  end,
+})
