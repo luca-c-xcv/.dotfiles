@@ -1,9 +1,13 @@
 promptToReturnFromSubprocess: false
 git:
   overrideGpg: true
+  mergeToolCmd: "nvim"
   commit:
     autoWrapCommitMessage: true
     autoWrapWidth: 72
+    useEditor: true
+  # Allow interactive rebase on pushed commits
+  skipRebaseWarning: true
 gui:
   border: rounded
   showIcons: true
