@@ -1,7 +1,6 @@
 promptToReturnFromSubprocess: false
 git:
   overrideGpg: true
-  mergeToolCmd: "nvim"
   commit:
     autoWrapCommitMessage: true
     autoWrapWidth: 72
