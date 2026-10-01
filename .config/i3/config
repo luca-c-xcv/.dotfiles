@@ -300,7 +300,7 @@ bindsym $super+Shift+Return exec code
 bindsym $super+Shift+l exec ~/.config/i3/scripts/ui/openlayout_shortcut
 #bindsym $super+Shift+m exec ~/.local/bin/espace
 #bindsym $super+Shift+v exec /usr/bin/diodon
-bindsym $super+Shift+e exec /opt/eclipse/eclipse
+bindsym $super+Shift+e exec /home/luca/.local/bin/eclipse
 bindsym $super+Shift+g exec /opt/smartgit/bin/smartgit.sh
 bindsym $super+Ctrl+g exec terminator --working-directory=$HOME/Develop/git
 bindsym $super+Shift+d exec ~/.local/bin/dbeaver
@@ -397,7 +397,7 @@ popup_during_fullscreen smart
 focus_follows_mouse no
 
 #set theme
-include $HOME/.config/i3/themes/dark.conf
+include $HOME/.config/i3/themes/dark-yellow.conf
 
 ###############################
 # External programs to launch #

@@ -28,7 +28,7 @@ function _openWorkApps(){
 
 # set devices settings 
 function settings() {
-  feh --bg-fill ~/Pictures/wallpaper/background-16.jpg
+  feh --bg-fill ~/Pictures/wallpaper/background-17.jpg
 
 	# set tupping enabled
 	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled" 1

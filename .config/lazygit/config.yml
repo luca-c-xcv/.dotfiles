@@ -105,3 +105,6 @@ customCommands:
 keybinding:
   universal:
     openDiffTool: t
+os:
+  editPreset: 'vim'
+

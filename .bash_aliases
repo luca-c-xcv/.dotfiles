@@ -18,7 +18,7 @@ alias scalescreen="xrandr --output eDP-1 --scale 0.8"
 alias spaceusage="du -hd1 $1 | sort -h"
 alias sctlstart="sctl env clean; sctl env up; sleep 2; sctl loas logs $1"
 alias loasreload="sctl env clean; sctl loas reload; sleep 2; sctl loas logs $1"
-alias lz="lazygit"
+alias lg="lazygit"
 
 alias gitconflict="~/.local/bin/git-conflict-solver.sh"
 alias dotfile="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
