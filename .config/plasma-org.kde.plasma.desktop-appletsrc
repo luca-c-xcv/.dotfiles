@@ -274,7 +274,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][2][Applets][38][Configuration]
-PreloadWeight=60
+PreloadWeight=75
 popupHeight=432
 popupWidth=324
 
@@ -283,7 +283,7 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][2][Applets][39][Configuration]
-PreloadWeight=70
+PreloadWeight=75
 
 [Containments][2][Applets][4]
 immutability=1
