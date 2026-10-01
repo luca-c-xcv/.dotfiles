@@ -1,0 +1,9 @@
+[Applications][Beeper]
+Seen=true
+
+[Applications][thunderbird]
+Seen=true
+
+[Notifications]
+CriticalInDndMode=false
+LowPriorityHistory=true
