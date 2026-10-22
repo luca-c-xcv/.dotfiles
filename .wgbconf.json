@@ -1,14 +1,15 @@
 {
   "conf_path": [
     "/home/luca/Documents/vpn/luca.canessa.it.conf",
-    "/home/luca/Documents/vpn/luca.conf"
+    "/home/luca/Documents/vpn/luca.conf",
+    "/home/luca/Documents/vpn/luca.canessa.it.conf"
   ],
   "confs": [
     {
       "path": "/home/luca/Documents/vpn/luca.canessa.it.conf",
       "token": true,
       "uri": "http://itfw.logobject.ch/wireguard/",
-      "connected": false
+      "connected": true
     }
   ],
   "error_codes": {
