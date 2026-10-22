@@ -3,13 +3,15 @@
 
 function _social(){
 	# open windows structure
-	~/.local/bin/openlayout 11 W_social
+  #	~/.local/bin/openlayout 11 W_social
 
-	sleep 1
+	# sleep 1
+
+  i3-msg 'workspace 11'
 	
-	setsid /opt/thunderbird/thunderbird &
+	setsid thunderbird &
 	setsid teams-for-linux &
-	setsid /opt/brave.com/brave/brave-browser --profile-directory=Default --app-id=bfkhhpicndnmmndblmefhojgcmcfkcml &
+	setsid brave-browser --profile-directory=Default --app-id=bfkhhpicndnmmndblmefhojgcmcfkcml &
 }
 
 function _extra(){
@@ -28,20 +30,20 @@ function _openWorkApps(){
 
 # set devices settings 
 function settings() {
-  feh --bg-fill ~/Pictures/wallpaper/background-17.jpg
+  feh --bg-fill ~/Pictures/wallpaper/background-21.jpg
 
-	# set tupping enabled
-	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled" 1
-	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled Default" 1
-	# set speedup cursor at maximum
-	#xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" '350' 1
+#  set tupping enabled
+#  xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled" 1
+#  xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" "libinput Tapping Enabled Default" 1
+#  set speedup cursor at maximum
+#  xinput set-prop "ASUE1A01:00 04F3:31D4 Touchpad" '350' 1
 }
 
 # open essential tools
 function tools() {
   # open gromit (tool to write on live screen)
   gromit-mpx &
-  i3-msg 'workspace 8; exec /opt/Obsidian/obsidian.AppImage'
+  i3-msg 'workspace 8; exec obsidian'
 }
 
 # open essential apps

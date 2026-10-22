@@ -397,7 +397,7 @@ popup_during_fullscreen smart
 focus_follows_mouse no
 
 #set theme
-include $HOME/.config/i3/themes/dark-yellow.conf
+include $HOME/.config/i3/themes/dark-cyan.conf
 
 ###############################
 # External programs to launch #
