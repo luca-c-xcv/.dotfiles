@@ -1,5 +1,9 @@
+[KPropertiesDialog]
+2 screens: Height=549
+2 screens: Width=418
+
 [PlasmaTransientsConfig]
-PreloadWeight=10
+PreloadWeight=2
 
 [PlasmaViews][Panel 2]
 floating=0

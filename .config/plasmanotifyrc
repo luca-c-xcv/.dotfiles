@@ -4,6 +4,9 @@ Seen=true
 [Applications][thunderbird]
 Seen=true
 
+[Applications][thunderbird_thunderbird]
+Seen=true
+
 [Notifications]
 CriticalInDndMode=false
 LowPriorityHistory=true

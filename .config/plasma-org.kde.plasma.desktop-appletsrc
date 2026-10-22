@@ -82,9 +82,9 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][20][Configuration]
-PreloadWeight=47
-popupHeight=450
-popupWidth=396
+PreloadWeight=82
+popupHeight=500
+popupWidth=440
 
 [Containments][2][Applets][20][Configuration][Appearance]
 showSeconds=true
@@ -243,6 +243,9 @@ DialogWidth=720
 [Containments][2][Applets][35][Configuration][SensorColors]
 cpu/all/usage=85,255,0
 
+[Containments][2][Applets][35][Configuration][SensorLabels]
+cpu/all/usage=CPUs
+
 [Containments][2][Applets][35][Configuration][Sensors]
 highPrioritySensorIds=["cpu/all/usage"]
 lowPrioritySensorIds=["cpu/all/cpuCount","cpu/all/coreCount"]
@@ -274,7 +277,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][2][Applets][38][Configuration]
-PreloadWeight=75
+PreloadWeight=100
 popupHeight=432
 popupWidth=324
 
@@ -283,7 +286,7 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][2][Applets][39][Configuration]
-PreloadWeight=75
+PreloadWeight=100
 
 [Containments][2][Applets][4]
 immutability=1
@@ -325,7 +328,7 @@ network/all/upload=13,43,120
 network/all/uploadBits=79,63,15
 
 [Containments][2][Applets][41][Configuration][Sensors]
-highPrioritySensorIds=["network/all/downloadBits"]
+highPrioritySensorIds=["network/all/downloadBits","network/all/uploadBits"]
 lowPrioritySensorIds=[]
 totalSensors=["network/all/downloadBits"]
 
@@ -338,6 +341,10 @@ minwidthFull=300
 textMode=value_left
 
 [Containments][2][Applets][42]
+immutability=1
+plugin=org.kde.plasma.marginsseparator
+
+[Containments][2][Applets][46]
 immutability=1
 plugin=org.kde.plasma.marginsseparator
 
@@ -357,18 +364,21 @@ PreloadWeight=100
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
-DialogHeight=84
+DialogHeight=91
 DialogWidth=1920
 
 [Containments][2][Configuration]
 PreloadWeight=34
 
 [Containments][2][General]
-AppletOrder=31;4;29;30;35;36;34;37;33;6;41;42;7;39;20;38;28
+AppletOrder=46;31;4;29;30;35;36;34;37;33;6;41;42;7;39;20;38;28
 
 [Containments][22]
+ItemGeometries-0x0=Applet-5:0,1008,640,64,0;
 ItemGeometries-1920x1080=Applet-5:704,992,1216,64,0;
-ItemGeometriesHorizontal=Applet-5:704,992,1216,64,0;
+ItemGeometries-1920x1200=Applet-5:0,1008,640,64,0;
+ItemGeometries-640x480=Applet-5:0,400,640,64,0;
+ItemGeometriesHorizontal=Applet-5:0,1008,640,64,0;
 activityId=41a195c9-c751-49a2-97ec-971d28aac226
 formfactor=0
 immutability=1
@@ -496,7 +506,7 @@ immutability=1
 plugin=org.kde.plasma.devicenotifier
 
 [Containments][8][Applets][19][Configuration]
-PreloadWeight=47
+PreloadWeight=100
 
 [Containments][8][Applets][22]
 immutability=1
@@ -510,7 +520,7 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][8][Applets][23][Configuration]
-PreloadWeight=57
+PreloadWeight=100
 
 [Containments][8][Applets][24][Configuration]
 PreloadWeight=42
@@ -520,14 +530,14 @@ immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=67
+PreloadWeight=56
 
 [Containments][8][Applets][32]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][8][Applets][32][Configuration]
-PreloadWeight=55
+PreloadWeight=5
 
 [Containments][8][Applets][43]
 immutability=1
@@ -541,7 +551,7 @@ immutability=1
 plugin=org.kde.plasma.weather
 
 [Containments][8][Applets][44][Configuration]
-PreloadWeight=70
+PreloadWeight=75
 configMigrated=true
 
 [Containments][8][Applets][44][Configuration][Appearance]
@@ -579,5 +589,5 @@ scaleIconsToFit=true
 shownItems=org.kde.plasma.volume,Fcitx,org.kde.plasma.weather
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/Creare un nuovo db da 0,desktop:/kde_backup,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/Hardware Report.pdf,desktop:/Create a mirror instance.pdf,desktop:/lorouter_data
-screenMapping=desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/Creare un nuovo db da 0,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/Hardware Report.pdf,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/_usr_bin_plasmashell.1000.crash,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/Create a mirror instance.pdf,0,41a195c9-c751-49a2-97ec-971d28aac226
+itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/kde_backup,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/Hardware Report.pdf,desktop:/lorouter_data,desktop:/Create a mirror instance.pdf,desktop:/Creare un nuovo db da 0
+screenMapping=desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/pull_request.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/transaction-management-talk.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/LoYas-Code-Review.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/transaction-management.md,0,41a195c9-c751-49a2-97ec-971d28aac226
