@@ -36,7 +36,6 @@ Plugin 'rhysd/conflict-marker.vim' " Git conflict marker
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim' " interactive filter program for any kind of list;
 Plugin 'terryma/vim-multiple-cursors' " multiple cursor
-Plugin 'liuchengxu/vista.vim' " outline
 Plugin 'iamcco/markdown-preview.nvim' " markdown preview
 
 " }}}
@@ -121,22 +120,19 @@ inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<Tab>" " CoC: co
 
 " ALE Configurations ----------------------------------------------------------
 " ALE fixer
-let g:ale_fixers = {
-\ 'c':['clang-format'],
-\ 'cpp':['clang-format'],
-\}
-" set linters 
-let g:ale_linters={
-      \ 'python': ['pylint'],
-      \ 'shell': ['shellcheck'],
-      \ 'java': ['javac', 'checkstyle'],
-      \ 'c':['clang', 'clangtidy'],
-      \ 'cpp':['clang', 'clangtidy'],
-      \}
-
-
-" Vista Configurations" -------------------------------------------------------
-let g:vista_default_executive = 'ctags'
+" let g:ale_fixers = {
+" \ 'c':['clang-format'],
+" \ 'cpp':['clang-format'],
+" \}
+" " set linters 
+" let g:ale_linters={
+"       \ 'python': ['pylint'],
+"       \ 'shell': ['shellcheck'],
+"       \ 'java': ['javac', 'checkstyle'],
+"       \ 'c':['clang', 'clangtidy'],
+"       \ 'cpp':['clang', 'clangtidy'],
+"       \}
+" 
 
 " Git Configurations ----------------------------------------------------------
 
@@ -150,24 +146,6 @@ endfunction
 " Command to run ThreeWayMergeBottom
 command! GMergeBottom call ThreeWayMergeBottom()
 
-" Project-local configs ----------------------------------------------------------
-
-" Load media-desktop .vimrc when editing any file under that project
-augroup media_desktop_project
-  autocmd!
-  autocmd BufRead,BufNewFile /home/luca/Develop/git/lo-tools/media-desktop/*
-        \ if !exists('g:media_desktop_loaded') |
-        \   source /home/luca/Develop/git/lo-tools/media-desktop/.vimrc |
-        \   let g:media_desktop_loaded = 1 |
-        \ endif
-augroup END
-
-
-let g:coc_global_extensions = ['coc-java']
-
-if filereadable('/home/luca/Develop/git/.vimrc')
-  source /home/luca/Develop/git/.vimrc
-endif
 
 " }}} 
 " END SETTINGS ----------------------------------------------------------------
