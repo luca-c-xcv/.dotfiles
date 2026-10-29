@@ -1,0 +1,65 @@
+#!/usr/bin/bash
+
+shopt -s nullglob
+
+if [ ! -d "$HOME/.local/etc/update-motd.d" ]; then
+  exit 1
+fi
+
+
+LOCAL_MOTD_MODULES=( "$HOME/.local/etc/update-motd.d"/* )
+
+shopt -u nullglob
+
+strip_ansi() {
+  sed -E 's/\x1b\[[0-9;?]*[A-Za-z]//g; s/\x1b\(B//g'
+}
+
+# Draws the given text (with ANSI colors) inside a box sized to the longest line.
+draw_box() {
+  local text="$1" line plain width=0
+  local -a lines=()
+
+  while IFS= read -r line; do
+    lines+=("$line")
+    plain=$(printf '%s' "$line" | strip_ansi)
+    (( ${#plain} > width )) && width=${#plain}
+  done <<< "$text"
+
+  local bar
+  printf -v bar '%*s' "$((width + 2))" ''
+  bar=${bar// /─}
+
+  printf '┌%s┐\n' "$bar"
+  for line in "${lines[@]}"; do
+    plain=$(printf '%s' "$line" | strip_ansi)
+    printf '│ %s%*s │\n' "$line" "$((width - ${#plain}))" ''
+  done
+  printf '└%s┘\n' "$bar"
+}
+
+all_output=""
+
+for module in "${LOCAL_MOTD_MODULES[@]}"; do
+  [ -f "$module" ] || continue
+  if [ -x "$module" ]; then
+    output=$("$module" 2>&1)
+  else
+    output=$(cat "$module")
+  fi
+
+  # Modules named 00-* are printed as-is, outside the box
+  if [[ "$(basename "$module")" == 00-* ]]; then
+    printf '%s\n' "$output"
+    continue
+  fi
+
+  # Drop leading/trailing blank lines so each module hugs its content
+  output=$(printf '%s\n' "$output" | sed -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}' | sed '/./,$!d')
+  [ -z "$output" ] && continue
+
+  # One blank line separates modules inside the box
+  all_output+="${all_output:+$'\n\n'}${output}"
+done
+
+[ -n "$all_output" ] && draw_box "$all_output"

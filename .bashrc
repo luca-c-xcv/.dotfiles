@@ -148,3 +148,13 @@ unset PROMPT_DIRTRIM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export OPENER="xdg-open" # used by lf
+export GPG_TTY=$(tty) # used by git to ask passphrase in the tty
+
+
+if [ -f "$HOME/.local/etc/motd" ]; then
+  /usr/bin/bash -c "$HOME/.local/etc/motd"
+fi
+
+

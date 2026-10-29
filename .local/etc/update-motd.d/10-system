@@ -1,0 +1,39 @@
+#!/bin/sh
+
+BLUE='\033[0;36m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+DISTRO=$(lsb_release -d | awk -F"\t" '{print $2}')
+CPU_MODEL=$(awk -F': ' '/model name/{print $2;exit}' /proc/cpuinfo)
+GPU_MODEL=$(lspci | grep -E -i 'vga|3d|display' | awk -F': ' '{print $2}' | sed -E 's/^[^ ]+ [^ ]+ //; s/ \(rev .*\)//' | sed -z 's/\n/ | /g; s/ | $/\n/')
+RAM=$(free -mth | awk '/Mem:/{printf "%.1f GB", $2}')
+UPTIME=$(awk '{h=int($1/3600); m=int(($1%3600)/60); printf "%dh %dm\n", h, m}' /proc/uptime)
+
+# ETHERNET
+ETHIP=$(ip -4 addr show | awk '/inet / && $NF ~ /^(eth|en)/ {print $2}' | cut -d/ -f1 | paste -sd,)
+ETHIP=${ETHIP:-"-"}
+
+# WIFI
+WIFIIP=$(ip -4 addr show | awk '/inet / && $NF ~ /^(wlan|wlp|wlo)/ {print $2}' | cut -d/ -f1 | paste -sd,)
+WIFIIP=${WIFIIP:-"-"}
+
+# VPN
+VPNIP=$(ip -4 addr show | awk '/inet / && $NF ~ /^(tun|tap|wg|tailscale|ppp|vpn|cscotun|luca)/ {print $2}' | cut -d/ -f1 | paste -sd,)
+VPNIP=${VPNIP:-"-"}
+
+
+REMOTEIP=$(curl --fail --ipv4 --max-time 3 -s https://ifconfig.me 2>/dev/null)
+
+
+printf "\n"
+printf "${BLUE}distro${RESET}:     %s\n" "${DISTRO}"
+printf "${BLUE}kernel${RESET}:     %s\n" "$(uname -r)"
+printf "${BLUE}cpu${RESET}:        %s\n" "${CPU_MODEL}"
+printf "${BLUE}gpu${RESET}:        %s\n" "${GPU_MODEL}"
+printf "${BLUE}ram${RESET}:        %s\n" "${RAM}"
+printf "${BLUE}local ips${RESET}:  eth: %s | wifi: %s | vpn: %s\n" "${ETHIP}" "${WIFIIP}" "${VPNIP}"
+printf "${BLUE}remote ip${RESET}:  %s\n" "${REMOTEIP}"
+printf "${BLUE}uptime${RESET}:     %s [%s]\n" "${UPTIME}" "$(uptime -s)"
+printf "\n"
+
