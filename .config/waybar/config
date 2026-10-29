@@ -1,0 +1,85 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 40,
+  "spacing": 8,
+  "margin-top": 8,
+  "margin-left": 12,
+  "margin-right": 12,
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "battery",
+    "clock",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}",
+    "format-active": "{name}",
+    "format-visible": "{name}",
+    "format-empty": "{name}",
+    "persistent-workspaces": {
+      "*": 4
+    },
+    "on-click": "activate"
+  },
+  "hyprland/window": {
+    "max-length": 60,
+    "separate-outputs": true,
+    "format": "{}",
+    "rewrite": {
+      "^$": "Home"
+    }
+  },
+  "clock": {
+    "interval": 60,
+    "format": "{:%H:%M}",
+    "tooltip": true,
+    "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw"
+  },
+  "network": {
+    "format-wifi": "\uf1eb  {essid}",
+    "format-ethernet": "\uf0e8  {ipaddr}",
+    "format-disconnected": "\uf127  offline",
+    "tooltip": true,
+    "tooltip-format": "{ifname}: {ipaddr}/{cidr}\nSignal: {signalStrength}%",
+    "on-click": "nm-connection-editor"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "\uf026  muted",
+    "format-icons": {
+      "default": ["\uf026", "\uf027", "\uf028"]
+    },
+    "scroll-step": 2,
+    "on-click": "pavucontrol",
+    "tooltip": true
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "\uf0e7  {capacity}%",
+    "format-plugged": "\uf1e6  {capacity}%",
+    "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+    "tooltip": true,
+    "tooltip-format": "{timeTo}\nPower: {power} W"
+  },
+  "custom/power": {
+    "format": "\uf011",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  }
+}
