@@ -530,7 +530,7 @@ immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=56
+PreloadWeight=66
 
 [Containments][8][Applets][32]
 immutability=1
@@ -589,5 +589,5 @@ scaleIconsToFit=true
 shownItems=org.kde.plasma.volume,Fcitx,org.kde.plasma.weather
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/kde_backup,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/Hardware Report.pdf,desktop:/lorouter_data,desktop:/Create a mirror instance.pdf,desktop:/Creare un nuovo db da 0
-screenMapping=desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/pull_request.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/transaction-management-talk.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/LoYas-Code-Review.md,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/transaction-management.md,0,41a195c9-c751-49a2-97ec-971d28aac226
+itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/lorouter_data,desktop:/Create a mirror instance.pdf,desktop:/Creare un nuovo db da 0,desktop:/kde_backup,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/Hardware Report.pdf
+screenMapping=desktop:/tesst,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226
