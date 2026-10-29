@@ -5,6 +5,10 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 
+if !empty($GIT_INDEX_FILE) || argv(0) =~# 'COMMIT_EDITMSG$'
+  let g:coc_start_at_startup = 0
+endif
+
 call vundle#begin(expand('$HOME/.vim/bundle'))
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
