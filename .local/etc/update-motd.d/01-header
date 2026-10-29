@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BLUE='\033[0;36m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+printf "Welcome to ${BLUE}${BOLD}%s${RESET} [%s %s]\n" "$(uname --nodename)" "$(uname --operating-system)" "$(uname --machine)"

@@ -155,13 +155,8 @@ export OPENER="xdg-open" # used by lf
 export GPG_TTY=$(tty) # used by git to ask passphrase in the tty
 
 
-echo -e "\e[1;32m  _                   _     _           _    \e[0m";
-echo -e "\e[1;32m | |                 | |   (_)         | |   \e[0m";
-echo -e "\e[1;32m | | ___   __ _  ___ | |__  _  ___  ___| |_  \e[0m";
-echo -e "\e[1;32m | |/ _ \ / _\` |/ _ \| '_ \| |/ _ \/ __| __| \e[0m";
-echo -e "\e[1;32m | | (_) | (_| | (_) | |_) | |  __/ (__| |_  \e[0m";
-echo -e "\e[1;32m |_|\___/ \__, |\___/|_.__/| |\___|\___|\__| \e[0m";
-echo -e "\e[1;32m           __/ |          _/ |               \e[0m";
-echo -e "\e[1;32m          |___/          |__/                \e[0m";
-echo
+if [ -f "$HOME/.local/etc/motd" ]; then
+  /usr/bin/bash -c "$HOME/.local/etc/motd"
+fi
+
 

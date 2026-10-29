@@ -1,0 +1,73 @@
+#!/bin/sh
+#
+# welcome-logins.sh
+# Displays a "who's logged in" banner for SSH welcome messages.
+# Shows: username, IP address, current process, and session PIDs.
+
+set -eu
+
+BOLD=$(tput bold 2>/dev/null || true)
+RESET=$(tput sgr0 2>/dev/null || true)
+CYAN=$(tput setaf 6 2>/dev/null || true)
+GREEN=$(tput setaf 2 2>/dev/null || true)
+
+# Identify the tty of the current session so we can highlight it.
+my_tty=$(tty 2>/dev/null | sed 's#^/dev/##') || my_tty=""
+
+# Check if there are any remote users
+remote_count=$(w -ih 2>/dev/null | awk '
+BEGIN { count = 0 }
+{
+    field2 = $2
+    if (field2 ~ /^(pts|tty|console)/ || (field2 ~ /^\// && field2 !~ /\./)) {
+        from = $3
+    } else {
+        from = $2
+    }
+    if (from != "-" && from != "-*") count++
+}
+END { print count }
+')
+
+if [ "$remote_count" -eq 0 ]; then
+    printf '%s\n' "${BOLD}${CYAN}no remote user${RESET}"
+    exit 0
+fi
+
+printf '%s\n' "${BOLD}${CYAN}Currently logged in remotely:${RESET}"
+printf '%-12s %-18s %s\n' "USER" "IP" "PROCESS"
+
+# Parse w -ih output
+w -ih | while read -r line; do
+    user=$(echo "$line" | awk '{print $1}')
+    field_idx=2
+    
+    # Detect if $2 is TTY or FROM
+    field2=$(echo "$line" | awk '{print $2}')
+    if echo "$field2" | grep -qE '^(pts|tty|console)|^/'; then
+        tty="$field2"
+        from=$(echo "$line" | awk '{print $3}')
+        field_idx=4
+    else
+        tty=""
+        from="$field2"
+        field_idx=3
+    fi
+    
+    # Skip local sessions
+    [ "$from" = "-" ] || [ "$from" = "-*" ] && from="local"
+    [ "$from" = "local" ] && continue
+    
+    # Get process name
+    process=$(echo "$line" | awk -v idx="$((field_idx + 4))" '{for(i=idx;i<=NF;i++) printf "%s ", $i}' | sed 's/ $//')
+    [ -z "$process" ] && process="-"
+    
+    # Format output
+    output=$(printf '%-12s %-18s %s' "$user" "$from" "$process")
+    
+    if [ -n "$my_tty" ] && [ "$tty" = "$my_tty" ]; then
+        printf '%s%s  <- you are here%s\n' "${GREEN}${BOLD}" "$output" "$RESET"
+    else
+        printf '%s\n' "$output"
+    fi
+done
