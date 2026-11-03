@@ -7,8 +7,8 @@ set $alt    Mod1
 # Define name for default screens
 set $internal "eDP-1" "eDP-1-1"
 set $external "HDMI2" "HDMI-1-0"
-set $dockC 		"DVI-I-1-1" "DVI-I-5-4" "DVI-I-2-1"
-set $dockR 		"DVI-I-2-2" "DVI-I-4-3" "DVI-I-3-2"
+set $dockC 		"DVI-I-1-1" "DVI-I-5-4" "DVI-I-3-2"
+set $dockR 		"DVI-I-2-2" "DVI-I-4-3" "DVI-I-2-1"
 set $hubL 		"DP-1-2" "DP-1-1-2"
 set $hubC 		"DP-1-1" "DP-1-1-1"
 
@@ -342,6 +342,9 @@ bindsym $super+Ctrl+$alt+plus gaps inner current plus 3
 ###########################
 # appearance and behavior #
 ###########################
+
+for_window [urgent="latest" class="(?i)teams-for-linux"] exec --no-startup-id wmctrl -r "teams-for-linux" -b remove,demands_attention
+
 floating_modifier $super
 floating_maximum_size -1 x -1
 
@@ -372,11 +375,9 @@ for_window [class="plasmashell" window_type="notification"] floating enable, bor
 for_window [window_role="Msgcompose" class="(?i)Thunderbird"] floating enable, border none
 no_focus [class="plasmashell" window_type="notification"]
 
-
 workspace_auto_back_and_forth no
 
 hide_edge_borders smart
-
 
 workspace_layout default
 
