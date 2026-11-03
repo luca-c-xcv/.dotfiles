@@ -1,0 +1,60 @@
+# Converted from ~/.config/terminator/config (default profile).
+# Tabs/splits/layouts are not supported by Alacritty: use tmux for those.
+
+live_config_reload = true
+
+[window]
+decorations = "None"          # terminator: borderless = True
+startup_mode = "Maximized"    # terminator: window_state = maximise
+opacity = 0.85                # terminator: background_darkness = 0.85 (needs a compositor)
+dynamic_title = true
+
+[scrolling]
+history = 100000              # terminator: scrollback_infinite (Alacritty max is 100000)
+
+[font]
+size = 9.0
+# Propo (proportional) variant breaks the cell grid; use the Mono variant
+normal = { family = "SauceCodePro Nerd Font Mono", style = "Regular" }
+bold = { family = "SauceCodePro Nerd Font Mono", style = "Bold" }
+italic = { family = "SauceCodePro Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "SauceCodePro Nerd Font Mono", style = "Bold Italic" }
+
+[cursor]
+style = { shape = "Underline", blinking = "Off" }
+
+[bell]
+animation = "EaseOutExpo"     # terminator: visible_bell = True
+duration = 100
+color = "#ffffff"
+
+[terminal]
+osc52 = "OnlyCopy"            # apps (e.g. Copilot via tmux) can write the clipboard, not read it
+
+[colors.primary]
+background = "#131618"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#131618"
+cursor = "#ffffff"
+
+[colors.normal]
+black = "#000000"
+red = "#cc0000"
+green = "#4e9a06"
+yellow = "#c4a000"
+blue = "#3465a4"
+magenta = "#75507b"
+cyan = "#06989a"
+white = "#d3d7cf"
+
+[colors.bright]
+black = "#555753"
+red = "#ef2929"
+green = "#8ae234"
+yellow = "#fce94f"
+blue = "#729fcf"
+magenta = "#ad7fa8"
+cyan = "#34e2e2"
+white = "#eeeeec"
