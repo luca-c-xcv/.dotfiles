@@ -160,3 +160,6 @@ if [ -f "$HOME/.local/etc/motd" ]; then
 fi
 
 
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
