@@ -82,7 +82,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][20][Configuration]
-PreloadWeight=82
+PreloadWeight=87
 popupHeight=500
 popupWidth=440
 
@@ -466,7 +466,7 @@ immutability=1
 plugin=org.kde.kdeconnect
 
 [Containments][8][Applets][12][Configuration]
-PreloadWeight=47
+PreloadWeight=62
 
 [Containments][8][Applets][13][Configuration]
 PreloadWeight=42
@@ -483,7 +483,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][8][Applets][15][Configuration]
-PreloadWeight=47
+PreloadWeight=52
 
 [Containments][8][Applets][15][Configuration][General]
 migrated=true
@@ -496,7 +496,7 @@ immutability=1
 plugin=org.kde.plasma.printmanager
 
 [Containments][8][Applets][17][Configuration]
-PreloadWeight=42
+PreloadWeight=47
 
 [Containments][8][Applets][18][Configuration]
 PreloadWeight=42
@@ -530,14 +530,14 @@ immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=66
+PreloadWeight=71
 
 [Containments][8][Applets][32]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][8][Applets][32][Configuration]
-PreloadWeight=0
+PreloadWeight=29
 
 [Containments][8][Applets][43]
 immutability=1
@@ -589,5 +589,5 @@ scaleIconsToFit=true
 shownItems=org.kde.plasma.volume,Fcitx,org.kde.plasma.weather
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/kde_backup,desktop:/Create a mirror instance.pdf,desktop:/Creare un nuovo db da 0,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/lorouter_data,desktop:/Hardware Report.pdf
-screenMapping=desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/LoBanner,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226
+itemsOnDisabledScreens=0,49c6e349-a1b4-4741-9ae3-313f34a54bf6,6,desktop:/Hardware Report.pdf,desktop:/lorouter_data,desktop:/Creare un nuovo db da 0,desktop:/_usr_bin_plasmashell.1000.crash,desktop:/kde_backup,desktop:/Create a mirror instance.pdf
+screenMapping=desktop:/lorouter_data,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/kde_backup,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/myabims,0,41a195c9-c751-49a2-97ec-971d28aac226,desktop:/LoBanner,0,41a195c9-c751-49a2-97ec-971d28aac226

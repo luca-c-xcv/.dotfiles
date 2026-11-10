@@ -1,6 +1,11 @@
+[KFileDialog Settings]
+Recent Files[$e]=CV.pdf,file:$HOME/Documents/personalDev/CV/CV.pdf
+Recent URLs[$e]=file:$HOME/Documents/personalDev/CV/
+detailViewIconSize=16
+
 [KPropertiesDialog]
-2 screens: Height=549
-2 screens: Width=418
+2 screens: Height=529
+2 screens: Width=410
 
 [PlasmaTransientsConfig]
 PreloadWeight=2
