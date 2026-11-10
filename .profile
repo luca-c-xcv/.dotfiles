@@ -31,7 +31,7 @@ export DART_SDK="/home/luca/Develop/dart/dart-sdk_2.19.6"
 export JAVA_HOME="/home/luca/Develop/java/jdk-21.0.1"
 export PATH="$JAVA_HOME/bin:$DART_SDK/bin:$PATH"
 export GTK3_RC_FILES="$HOME/.config/gtk-3.0/settings.ini"
-
+export GTK_THEME=Flat-Remix-GTK-Blue-Dark
 
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
