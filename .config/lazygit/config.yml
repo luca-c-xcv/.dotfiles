@@ -58,8 +58,8 @@ gui:
   commitAuthorLongLength: 20
   commitHashLength: 8
   splitDiff: always
-  wrapLinesInStagingView: true
-  useHunkModeInStagingView: true
+  wrapLinesInDiffView: true
+  useHunkModeInDiffView: true
   showNumstatInFilesView: true
   showFileTree: true
   showRootItemInFileTree: false
